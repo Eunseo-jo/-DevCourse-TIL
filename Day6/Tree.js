@@ -13,8 +13,8 @@ const tree = [
 ];
 */
 
-class Node{
-    constructor(value){
+class Node {
+    constructor(value) {
         this.value = value;
         this.left = null;
         this.right = null;
@@ -22,26 +22,26 @@ class Node{
 }
 
 class Tree {
-    constructor(node){
+    constructor(node) {
         this.root = node;
     }
 
-    display(){
+    display() {
         //Level Order
         const queue = new Queue();
         queue.enqueue(this.root);
-        while(queue.size()){
+        while (queue.size()) {
             const currentNode = queue.dequeue();
             console.log(currentNode.value);
-            if(currentNode.left) queue.enqueue(currentNode.left);
-            if(currentNode.right) queue.enqueue(currentNode.right);
+            if (currentNode.left) queue.enqueue(currentNode.left);
+            if (currentNode.right) queue.enqueue(currentNode.right);
         }
     }
     //전위 순회(pre-order)
     /* 루트-왼쪽-오른쪽 순으로 노드 방문 */
-    PreOrderRecursion(){
-        function preOrderHelper(node){
-            if(!node) return;
+    PreOrderRecursion() {
+        function preOrderHelper(node) {
+            if (!node) return;
             console.log(node.value);
             preOrderHelper(node.left);
             preOrderHelper(node.right);
@@ -49,52 +49,49 @@ class Tree {
         preOrderHelper(this.root);
     }
 
-    PreOrderStack(){
+    PreOrderStack() {
         let nodeStack = [];
         nodeStack.push(this.root);
-        while(nodeStack.length){
+        while (nodeStack.length) {
             let node = nodeStack.pop();
             console.log(node.value);
-            if(node.right) nodeStack.push(node.right);
-            if(node.left) nodeStack.push(node.left);
+            if (node.right) nodeStack.push(node.right);
+            if (node.left) nodeStack.push(node.left);
         }
     }
     //중위 순회(in-order)
     //왼쪽-현재노드-오른쪽 순으로 방문
-    InOrderRecursion(){
-        function inOrderHelper(node){
-            if(!node) return;
+    InOrderRecursion() {
+        function inOrderHelper(node) {
+            if (!node) return;
             inOrderHelper(node.left);
             console.log(node.value);
             inOrderHelper(node.right);
         }
         inOrderHelper(this.root);
     }
-    InOrderStack(){
+    InOrderStack() {
         let current = this.root;
         let stack = [];
         let done = false;
-        while(!done){
-            if(current !== null){
+        while (!done) {
+            if (current !== null) {
                 stack.push(current);
                 current = current.left;
-            }
-            else{
-                if(stack.length){
+            } else {
+                if (stack.length) {
                     current = stack.pop();
                     console.log(current.value);
                     current = current.right;
-                }
-                else done = true;
+                } else done = true;
             }
         }
-
     }
     //후위 순회(post-order)
     //왼쪽-오른쪽-현재 순으로 방문
-    PostOrderRecursion(){
-        function postOrderHelper(node){
-            if(!node) return;
+    PostOrderRecursion() {
+        function postOrderHelper(node) {
+            if (!node) return;
             postOrderHelper(node.left);
             postOrderHelper(node.right);
             console.log(node.value);
@@ -102,18 +99,18 @@ class Tree {
         postOrderHelper(this.root);
     }
 
-    PostOrderStack(){
+    PostOrderStack() {
         let stack1 = [];
         let stack2 = [];
         stack1.push(this.root);
-        while(stack1.length){
+        while (stack1.length) {
             let node = stack1.pop();
             stack2.push(node);
 
-            if(node.left) stack1.push(node.left);
-            if(node.right) stack1.push(node.right);
+            if (node.left) stack1.push(node.left);
+            if (node.right) stack1.push(node.right);
         }
-        while(stack2.length){
+        while (stack2.length) {
             let node = stack2.pop();
             console.log(node.value);
         }
